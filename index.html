@@ -1,0 +1,332 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Power Up Inner Power — Landing Rediseñada (3 Variantes)</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    :root{
+      /* Paleta principal (corporativa, elegante) */
+      --navy:#0a1f44;           /* Confianza, autoridad */
+      --navy-2:#06132e;         /* Más profundo para degradados */
+      --teal:#2a9d8f;           /* Equilibrio/bienestar */
+      --peach:#e9a09b;          /* Humano/cálido */
+      --salmon:#e67e67;         /* Acción/CTA */
+      --bg:#f6f8fb;             /* Fondo suave */
+      --card:#ffffff;           /* Tarjeta */
+      --ink:#2b2b2b;            /* Texto principal */
+      --muted:#6c7a89;          /* Texto secundario */
+      --shadow:0 10px 25px rgba(10,31,68,.15);
+      --radius:14px;
+    }
+    *{box-sizing:border-box}
+    body{margin:0;font-family:Inter,system-ui, -apple-system, Segoe UI, Roboto, sans-serif;color:var(--ink);background:var(--bg);}
+    h1,h2,h3{margin:0 0 .6rem}
+    h1{font-weight:800;letter-spacing:.3px}
+    a{text-decoration:none}
+    .container{max-width:1200px;margin:0 auto;padding:0 20px}
+
+    /* ====== VARIANTE A: Hero dividido + tarjeta formulario (inspiración capturas) ====== */
+    .tA-nav{position:sticky;top:0;background:rgba(255,255,255,.9);backdrop-filter:saturate(150%) blur(8px);border-bottom:1px solid #eef1f5;z-index:30}
+    .tA-nav .inner{display:flex;align-items:center;justify-content:space-between;height:72px}
+    .brand{display:flex;gap:10px;align-items:center;font-weight:700;color:var(--navy)}
+    .brand .dot{width:12px;height:12px;border-radius:50%;background:var(--teal)}
+    .tA-nav a.cta{background:var(--salmon);color:#fff;padding:10px 18px;border-radius:999px;font-weight:700;box-shadow:var(--shadow)}
+
+    .tA-hero{position:relative;isolation:isolate}
+    .tA-hero .bg{position:absolute;inset:0;background:linear-gradient(110deg,var(--navy) 0%, var(--navy-2) 48%, var(--peach) 100%);}
+    .tA-hero .container{position:relative;display:grid;grid-template-columns:1.1fr .9fr;gap:36px;align-items:center;min-height:88vh;padding-top:48px;padding-bottom:48px}
+
+    .tA-left h1{color:#fff;font-size:clamp(32px,5vw,54px);line-height:1.05;text-transform:uppercase}
+    .tA-left p{color:#f0f4ff;max-width:630px;font-size:1.05rem;margin:.8rem 0 1.5rem}
+    .tA-bullets{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px;max-width:640px;margin:16px 0}
+    .tA-bullets span{background:rgba(255,255,255,.16);border:1px solid rgba(255,255,255,.25);color:#fff;padding:10px 12px;border-radius:999px;font-size:.9rem;text-align:center}
+
+    .tA-video{margin-top:18px;max-width:680px;aspect-ratio:16/9;border-radius:var(--radius);overflow:hidden;box-shadow:0 20px 50px rgba(0,0,0,.25);border:1px solid rgba(255,255,255,.25)}
+    .tA-video iframe{width:100%;height:100%;display:block}
+
+    .tA-card{background:var(--card);border-radius:18px;padding:26px;box-shadow:var(--shadow);border:1px solid #edf0f4}
+    .tA-card h3{color:#0f355f;font-size:1.35rem}
+    .tA-card p{color:var(--muted);font-size:.95rem;margin-bottom:16px}
+    .tA-form{display:flex;flex-direction:column;gap:12px}
+    .tA-form label{font-size:.85rem;color:#3d4d5c}
+    .tA-form input{padding:12px 14px;border-radius:10px;border:1px solid #dae2ec;outline:none;font-size:.95rem}
+    .tA-form button{margin-top:6px;background:var(--salmon);color:#fff;border:none;padding:12px 18px;border-radius:999px;font-weight:700;cursor:pointer}
+    .tA-form .note{font-size:.85rem;color:#64748b}
+
+    .tA-sticky{position:fixed;left:0;right:0;bottom:14px;z-index:40}
+    .tA-sticky .bar{margin:0 auto;max-width:1100px;background:#1c2430;color:#fff;border-radius:16px;padding:12px 16px;display:grid;grid-template-columns:1fr auto auto;gap:16px;align-items:center;box-shadow:0 18px 40px rgba(0,0,0,.35)}
+    .avatar{width:44px;height:44px;border-radius:50%;background:linear-gradient(135deg,#cfd9df,#e2ebf0);display:inline-flex;align-items:center;justify-content:center;color:#1e293b;font-weight:800}
+    .countdown{display:flex;gap:8px}
+    .cd-box{background:#0f1720;padding:10px 12px;border-radius:12px;text-align:center;min-width:64px}
+    .cd-box .num{font-weight:800;font-size:1.1rem;letter-spacing:.4px}
+    .cd-box .lbl{font-size:.7rem;color:#9aa6b2}
+    .sticky-cta{background:linear-gradient(135deg,var(--peach),var(--salmon));color:#fff;padding:12px 18px;border-radius:999px;font-weight:800}
+
+    /* Sección Power-Ups (común a todas las variantes) */
+    .powerups{padding:80px 0}
+    .powerups h2{text-align:center;color:var(--navy);font-size:2rem;margin-bottom:10px}
+    .powerups p.lead{text-align:center;color:var(--muted);max-width:780px;margin:0 auto 36px}
+    .power-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:18px}
+    .power-card{background:#fff;border:1px solid #edf0f4;border-left:6px solid var(--teal);border-radius:12px;padding:18px 18px 20px;box-shadow:var(--shadow)}
+    .power-card h4{color:var(--navy);margin-bottom:8px}
+    .power-card p{color:#4b5563;font-size:.95rem}
+
+    /* Bloque de pago/registro común */
+    .cta-block{padding:70px 0;background:#fff}
+    .cta-wrap{display:grid;grid-template-columns:1.1fr .9fr;gap:24px;align-items:center}
+    .cta-card{background:#0b1e43;color:#fff;border-radius:18px;padding:26px;box-shadow:var(--shadow)}
+    .cta-card h3{font-size:1.6rem;margin-bottom:8px}
+    .cta-card p{opacity:.9}
+    .cta-card a.btn{display:inline-block;margin-top:14px;background:var(--salmon);color:#fff;padding:12px 18px;border-radius:999px;font-weight:800}
+    .reg-card{background:#fff;border:1px solid #edf0f4;border-radius:18px;padding:24px;box-shadow:var(--shadow)}
+    .reg-card h3{color:var(--navy);margin-bottom:6px}
+    .reg-card .gift{color:#0a7d61;font-weight:700}
+    .reg-form{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:8px}
+    .reg-form label{font-size:.85rem;color:#334155}
+    .reg-form input{width:100%;padding:12px;border-radius:10px;border:1px solid #dae2ec}
+    .reg-form .full{grid-column:1/-1}
+    .reg-form button{grid-column:1/-1;background:var(--teal);color:#fff;border:none;padding:12px 18px;border-radius:999px;font-weight:800}
+
+    /* ====== VARIANTE B: Hero Macrotipo centrado + formulario flotante ====== */
+    .tB-hero{position:relative;padding:116px 0 76px;background:radial-gradient(1000px 500px at 20% -10%, #1b325e 0%, var(--navy) 60%), linear-gradient(180deg, #fefefe 0%, #f6f8fb 100%);}
+    .tB-hero .headline{color:#fff;text-align:center;text-transform:uppercase;font-size:clamp(34px,5.6vw,72px);line-height:1.02;letter-spacing:.6px}
+    .tB-hero .sub{color:#e2e8f0;text-align:center;max-width:800px;margin:12px auto 26px}
+    .tB-hero .floating{max-width:960px;margin:0 auto;display:grid;grid-template-columns:1fr .9fr;gap:20px}
+    .tB-panel{background:#fff;border-radius:20px;padding:22px;box-shadow:var(--shadow)}
+    .tB-panel h3{color:var(--navy)}
+    .tB-form{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:10px}
+    .tB-form input{padding:12px;border:1px solid #dee4ee;border-radius:10px}
+    .tB-form button{grid-column:1/-1;background:var(--salmon);color:#fff;border:none;padding:12px 18px;border-radius:999px;font-weight:800}
+    .tB-video{aspect-ratio:16/9;border-radius:16px;overflow:hidden;box-shadow:var(--shadow);border:1px solid #e8edf4}
+
+    /* ====== VARIANTE C: Minimal ejecutiva ====== */
+    .tC-header{background:#0b1e43;color:#fff}
+    .tC-header .inner{display:flex;gap:18px;align-items:center;justify-content:space-between;padding:18px 0}
+    .tC-hero{padding:80px 0}
+    .tC-hero h1{color:var(--navy);font-size:clamp(34px,5vw,56px)}
+    .tC-hero p{color:#4b5563;max-width:720px}
+    .tC-cta{display:flex;gap:10px;margin-top:14px}
+    .btn-outline{border:2px solid var(--navy);color:var(--navy);border-radius:999px;padding:10px 16px;font-weight:800}
+    .btn-fill{background:var(--salmon);color:#fff;border-radius:999px;padding:10px 16px;font-weight:800}
+
+    /* Utilidades */
+    @media (max-width:960px){
+      .tA-hero .container{grid-template-columns:1fr}
+      .tA-sticky .bar{grid-template-columns:1fr auto;}
+      .cta-wrap{grid-template-columns:1fr}
+      .tB-hero .floating{grid-template-columns:1fr}
+      .tB-hero{padding-top:82px}
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ===================== VARIANTE A ===================== -->
+  <header class="tA-nav">
+    <div class="inner container">
+      <div class="brand"><span class="dot"></span> Power Up Inner Power</div>
+      <nav><a class="cta" href="#registro">Solicitar información</a></nav>
+    </div>
+  </header>
+
+  <section class="tA-hero">
+    <div class="bg"></div>
+    <div class="container">
+      <div class="tA-left">
+        <h1>Potencia tu fuerza interior. Lidera con claridad.</h1>
+        <p>Gancho: empresarios y profesionales que convierten la presión en rendimiento superior. Power Up Inner Power te ayuda a sostener enfoque, energía y estabilidad emocional para decidir mejor y avanzar más rápido.</p>
+        <div class="tA-bullets">
+          <span>Decisión con calma</span>
+          <span>Enfoque láser</span>
+          <span>Energía sostenible</span>
+        </div>
+        <div class="tA-video">
+          <iframe src="" title="Video de bienvenida" allowfullscreen></iframe>
+        </div>
+      </div>
+      <aside class="tA-card">
+        <h3>Comienza con el próximo módulo</h3>
+        <p>Completa el formulario y recibe la guía y agenda completa. <strong>Registro incluye acceso a una sesión en vivo de regalo.</strong></p>
+        <form class="tA-form" action="#" method="post">
+          <label for="a-nombre">Nombre completo</label>
+          <input id="a-nombre" name="nombre" type="text" required placeholder="Tu nombre y apellido" />
+          <label for="a-email">Correo electrónico</label>
+          <input id="a-email" name="email" type="email" required placeholder="tu@email.com" />
+          <label for="a-tel">Teléfono</label>
+          <input id="a-tel" name="telefono" type="tel" required placeholder="+52 1 222 123 4567" />
+          <button type="submit">Quiero la información</button>
+          <p class="note">Sin spam. Cancelas cuando quieras.</p>
+        </form>
+      </aside>
+    </div>
+
+    <!-- Sticky bar inspirada en las capturas -->
+    <div class="tA-sticky" data-deadline="2025-08-19T23:59:59">
+      <div class="bar">
+        <div style="display:flex;align-items:center;gap:12px">
+          <div class="avatar">PU</div>
+          <div>
+            <div style="font-weight:700">Inscripción temprana</div>
+            <div style="opacity:.75;font-size:.9rem">Aprovecha el precio preferente</div>
+          </div>
+        </div>
+        <div class="countdown">
+          <div class="cd-box"><div class="num" data-days>08</div><div class="lbl">Días</div></div>
+          <div class="cd-box"><div class="num" data-hours>04</div><div class="lbl">Hrs</div></div>
+          <div class="cd-box"><div class="num" data-mins>44</div><div class="lbl">Mins</div></div>
+          <div class="cd-box"><div class="num" data-secs>06</div><div class="lbl">Segs</div></div>
+        </div>
+        <a class="sticky-cta" href="#pago">¡Solicitar información y acceder!</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Power-Ups comunes -->
+  <section class="powerups">
+    <div class="container">
+      <h2>Power-Ups Estrella</h2>
+      <p class="lead">Herramientas prácticas para líderes con agenda exigente. Integra hábitos y micro-acciones que sostienen tu mejor desempeño.</p>
+      <div class="power-grid">
+        <article class="power-card">
+          <h4>InnerPower</h4>
+          <p>Reprograma el diálogo interno: transforma creencias limitantes en decretos que te impulsan. Comunicación interna clara = decisiones más firmes.</p>
+        </article>
+        <article class="power-card">
+          <h4>FocusX</h4>
+          <p>Enfoque tipo rayo láser: elimina ruido, entra en estado de flujo y multiplica tu productividad sin desgaste cognitivo.</p>
+        </article>
+        <article class="power-card">
+          <h4>FullFlow</h4>
+          <p>Sincroniza mente, cuerpo y emoción para operar en tu punto óptimo. Alto rendimiento con equilibrio real.</p>
+        </article>
+        <article class="power-card">
+          <h4>EnergyBoss</h4>
+          <p>Gestión estratégica de energía: identifica fugas, recupera vitalidad y dirige tu fuerza como un activo premium.</p>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- Registro + Pago comunes -->
+  <section class="cta-block" id="registro">
+    <div class="container cta-wrap">
+      <div class="cta-card">
+        <h3>Regístrate y recibe una sesión en vivo de regalo</h3>
+        <p>Acceso exclusivo a preguntas y respuestas en directo con el equipo. Cupos limitados.</p>
+        <a class="btn" href="#pago">Ir a la página de pago</a>
+      </div>
+      <div class="reg-card">
+        <h3>Quiero registrarme</h3>
+        <div class="gift">🎁 Bono: sesión en vivo incluida</div>
+        <form class="reg-form" action="#" method="post">
+          <div class="full">
+            <label for="r-nombre">Nombre completo</label>
+            <input id="r-nombre" name="nombre" type="text" required>
+          </div>
+          <div>
+            <label for="r-email">Correo electrónico</label>
+            <input id="r-email" name="email" type="email" required>
+          </div>
+          <div>
+            <label for="r-tel">Teléfono</label>
+            <input id="r-tel" name="telefono" type="tel" required>
+          </div>
+          <button type="submit">Guardar mi lugar</button>
+        </form>
+      </div>
+    </div>
+  </section>
+
+  <section id="pago" class="cta-block" style="background:#0b1e43">
+    <div class="container" style="display:grid;gap:14px;justify-items:center;text-align:center;color:#fff">
+      <h2 style="font-size:2rem">Accede al programa</h2>
+      <p style="max-width:700px;opacity:.9">Concreta tu inscripción en un entorno de pago seguro. Recibirás confirmación inmediata y acceso a materiales de bienvenida.</p>
+      <a href="#" class="btn" style="background:linear-gradient(135deg,var(--peach),var(--salmon));padding:14px 22px;border-radius:999px;font-weight:800;color:#fff">Ir a la página de pago</a>
+    </div>
+  </section>
+
+  <!-- ===================== VARIANTE B ===================== -->
+  <section class="tB-hero">
+    <div class="container">
+      <h1 class="headline">Redefine tu límite interior</h1>
+      <p class="sub">Un sistema práctico para sostener foco, energía y autocontrol emocional mientras creces tu negocio.</p>
+      <div class="floating">
+        <div class="tB-video"><iframe src="" title="Video de bienvenida" allowfullscreen></iframe></div>
+        <div class="tB-panel">
+          <h3>Recibe la guía completa</h3>
+          <p style="color:#475569;margin:.4rem 0 1rem">Al registrarte obtienes <strong>una sesión en vivo de regalo</strong> y recordatorios del próximo módulo.</p>
+          <form class="tB-form" action="#" method="post">
+            <input type="text" placeholder="Nombre completo" required>
+            <input type="email" placeholder="Correo electrónico" required>
+            <input type="tel" placeholder="Teléfono" class="full" style="grid-column:1/-1" required>
+            <button type="submit">Quiero la información</button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </section>
+  <section class="powerups">
+    <div class="container">
+      <h2>Power-Ups Estrella</h2>
+      <div class="power-grid">
+        <div class="power-card"><h4>InnerPower</h4><p>Reprograma tu diálogo interno con declaraciones que impulsan acción.</p></div>
+        <div class="power-card"><h4>FocusX</h4><p>Foco profundo y estable para producir más en menos tiempo.</p></div>
+        <div class="power-card"><h4>FullFlow</h4><p>Equilibrio integral para operar en tu zona óptima.</p></div>
+        <div class="power-card"><h4>EnergyBoss</h4><p>Domina tu energía diaria como un recurso premium.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================== VARIANTE C ===================== -->
+  <header class="tC-header">
+    <div class="inner container">
+      <div class="brand"><span class="dot"></span> Inner Power</div>
+      <nav style="display:flex;gap:14px"><a class="btn-outline" style="border-color:#fff;color:#fff" href="#registro">Registro</a><a class="btn-fill" href="#pago">Pagar</a></nav>
+    </div>
+  </header>
+  <section class="tC-hero container">
+    <h1>De la intención al alto rendimiento</h1>
+    <p>Implementa microrutinas de foco, energía y calma que sostienen decisiones estratégicas durante el día. Incluye sesión en vivo de regalo al registrarte.</p>
+    <div class="tC-cta"><a class="btn-fill" href="#registro">Comenzar</a><a class="btn-outline" href="#powerups">Ver Power-Ups</a></div>
+  </section>
+  <section class="powerups">
+    <div class="container">
+      <h2>Power-Ups Estrella</h2>
+      <div class="power-grid">
+        <div class="power-card"><h4>InnerPower</h4><p>Autodiálogo alineado con tus objetivos: claridad y determinación.</p></div>
+        <div class="power-card"><h4>FocusX</h4><p>Reduce la dispersión y entra en flujo productivo.</p></div>
+        <div class="power-card"><h4>FullFlow</h4><p>Armoniza mente, cuerpo y emoción para rendir con salud.</p></div>
+        <div class="power-card"><h4>EnergyBoss</h4><p>Gestiona tu energía con estrategia para sostener tu agenda.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <script>
+    // Countdown para la barra fija de la variante A
+    (function(){
+      const bar = document.querySelector('.tA-sticky');
+      if(!bar) return;
+      const deadline = new Date(bar.getAttribute('data-deadline'));
+      const ds = bar.querySelector('[data-days]');
+      const hs = bar.querySelector('[data-hours]');
+      const ms = bar.querySelector('[data-mins]');
+      const ss = bar.querySelector('[data-secs]');
+      const pad=n=>String(n).padStart(2,'0');
+      function tick(){
+        const now = new Date();
+        let diff = Math.max(0, deadline - now);
+        const d = Math.floor(diff/86400000); diff-=d*86400000;
+        const h = Math.floor(diff/3600000); diff-=h*3600000;
+        const m = Math.floor(diff/60000); diff-=m*60000;
+        const s = Math.floor(diff/1000);
+        ds.textContent = pad(d); hs.textContent = pad(h); ms.textContent = pad(m); ss.textContent = pad(s);
+      }
+      tick(); setInterval(tick, 1000);
+    })();
+  </script>
+</body>
+</html>
